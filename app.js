@@ -7,8 +7,7 @@ var Highcharts = require('highcharts');
 var moment = require('moment');
 const osLocale = require('os-locale'); // For local/langue detection
 
-// moment.locale(osLocale.sync().substr(0,2)); // Fix local with system
-moment.locale('en'); // Fix local with system
+moment.locale(osLocale.sync().substr(0,2)); // Fix local with system
 
 // }}}
 // Replace console.log -> ipcRenderer.sendMessage('console') + original console.log {{{
