@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Material Design Conkie Theme</title>
+
+        <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/materialize.min.css" media="screen,projection">
+        <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/style.css" media="screen,projection">
+
+        <script href="<%=paths.modules%>/jquery/dist/jquery.min.js"></script>
+        <script href="<%=paths.theme%>/js/materialize.min.js"></script>
+        <script src="<%=paths.theme%>/app.js"></script>
+        <script src="<%=paths.modules%>/highcharts-ng/dist/highcharts-ng.min.js"></script>
+
+        <!-- Meta options passed to Conkie -->
+        <meta name="conkie-window-type" content="desktop"/>
+        <meta name="conkie-transparent" content="true"/>
+        <meta name="conkie-width" content="1920"/>
+        <meta name="conkie-height" content="1080"/>
+    </head>
+    <body ng-app="app" ng-controller="conkieController">
+    <script src="<%=paths.modules%>/angular/angular.min.js"></script>
+    <script src="<%=paths.modules%>/angularjs-gauge/dist/angularjs-gauge.min.js"></script>
+
+        <main class="container blue-grey-text text-darken-3">
+            <div class="row col s12"></div>
+
+            <!-- General info -->
+            <div class="row">
+                <div class="col s2 col s3 pull-s2">
+                    <article class="row col s12 pull-s1 z-depth-4 no-pad">
+                        <header class="blue lighten-1 white-text col s12 brad-top">
+                            <h5 class="center-align">System Info</h5>
+                        </header>
+                        <section class="white col s12 brad-bottom">
+                            <header>
+                                <h4 ng-show="stats.system.hostname" class="center-align">{{stats.system.hostname}}</h4>
+                            </header>
+
+                            <p><b>CPU : </b><span ng-show="stats.cpu.usage" class="picture-slot3">{{stats.cpu.usage}}%</span></p>
+                            <p><b>Temp : </b><span ng-show="stats.temperature.main" class="picture-slot3">{{stats.temperature.main}}°C</span></p>
+                            <p><b>IOread : </b><span ng-show="stats.io">{{stats.io.totalRead}} Kb</span></p>
+                            <p><b>Mem : </b><span ng-show="stats.memory" class="picture-slot5">{{stats.memory.used | byteSize:true}}</span></p>
+                            <p><b>Down : </b><span ng-show="stats.netTotal" class="picture-slot6">{{stats.netTotal.downSpeed | byteSize:true}}</span></p>
+                        </section>
+                    </article>
+                </div>
+            </div>
+
+            <div class="row col s12"></div>
+
+            <!-- Date & time -->
+            <div class="row">
+                <div class="col s2 col s3 pull-s2">
+                    <article class="row col s12 pull-s1 z-depth-4 no-pad">
+                        <header class="teal darken-2 white-text col s12 brad-top">
+                            <h5 class="center-align capitalize" ng-show="weekday">{{weekday}}</h5>
+                        </header>
+                        <section class="white col s12 brad-bottom no-pad">
+                            <header class="teal white-text pad-tb-5">
+                                <h4 ng-show="month" class="center-align no-mar uppercase">{{month.substr(0,3)}}</h4>
+                                <h3 ng-show="day" class="center-align no-mar">{{day}}</h3>
+                                <h4 ng-show="year" class="center-align no-mar blue-grey-text text-lighten-5">{{year}}</h4>
+                            </header>
+
+                            <div class="pad-lr-5 center-align">
+                                <p><span ng-show="time" class="time">{{time}}</span></p>
+                                <div class="calandar"></div>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+
+        </main>
+    </body>
+</html>

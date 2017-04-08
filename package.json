@@ -1,0 +1,27 @@
+{
+  "name": "conkie-theme-material",
+  "version": "1.0.0",
+  "description": "Conkie theme using a materialize css",
+  "main": "index.html",
+  "keywords": [
+    "conkie",
+    "theme",
+    "material"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Heziode-dev/conkie-theme-material"
+  },
+  "author": "Heziode <heziode@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "highcharts": "^4.2.7",
+    "highcharts-ng": "0.0.12",
+    "jquery": "^3.2.1",
+    "lodash": "^4.16.1",
+    "materialize-css": "^0.98.1",
+    "moment": "^2.15.1",
+    "os-locale": "^2.0.0"
+  }
+}

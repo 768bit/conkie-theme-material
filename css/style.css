@@ -1,0 +1,71 @@
+/*
+ * Utils
+ */
+.no-mar {
+    margin: 0;
+}
+
+.no-pad {
+    padding: 0 !important;
+}
+
+.pad-lr-5 {
+    padding-left:5%;
+    padding-right:5%;
+}
+
+.pad-tb-5 {
+    padding-top:5%;
+    padding-bottom:5%;
+}
+
+.brad {
+    border-radius: 3px;
+}
+
+.brad-top {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.brad-bottom {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.radius-full {
+    border-radius: 50%;
+}
+
+/*
+ * Focused style
+ */
+
+section header > *:not(:last-child) {
+    padding-bottom: 5px;
+}
+
+.time {
+    font-size: 50px;
+}
+
+.dayCalandar {
+    font-size: 15px;
+}
+
+.table-calandar {
+    line-height: .5;
+    margin-bottom: 10px;
+}
