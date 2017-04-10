@@ -3,8 +3,9 @@ var _ = require('lodash');
 var $ = jQuery = require('jquery');
 var angular = require('angular');
 var electron = require('electron');
-var Highcharts = require('highcharts');
+var angularjsGauge = require('angularjs-gauge');
 var moment = require('moment');
+var currentDate; // For optimize calandar generation
 const osLocale = require('os-locale'); // For local/langue detection
 
 moment.locale(osLocale.sync().substr(0,2)); // Fix local with system
@@ -65,9 +66,7 @@ var options = {
 // -------------------------------------------
 
 
-var app = angular.module('app', [
-    'highcharts-ng'
-]);
+var app = angular.module('app', ['angularjs-gauge']);
 
 
 // Angular / Filters {{{
@@ -331,13 +330,16 @@ app.controller('conkieController', function($scope, $interval, $timeout) {
 
 	// .time {{{
 	$interval(function() {
-        $scope.weekday = moment().localeData().weekdays()[moment().format('e')];
+        $scope.weekday = moment.weekdays(false)[moment().format('E')];
         $scope.month = moment().format('MMMM');
         $scope.day = moment().format('DD');
         $scope.year = moment().format('YYYY');
 		$scope.time = moment().format('HH:mm');
 
-        makeCalendar();
+		if (currentDate !== moment().format('DD')) {
+            currentDate = moment().format('DD');
+            makeCalendar();
+        }
 	}, 1000);
 	// }}}
 
@@ -479,21 +481,21 @@ function makeCalendar()  {
     var currentMonth = moment().format('M');
     var lastDayCurrentMonth = moment( [moment().get('year'), moment().get('month') + 1, 1]).subtract(1, 'day').format('D');
 
-    var startMonthDate = moment().subtract( moment().date() -1, 'day' ).day();
-    var weekFirstDayCurrentMonth = moment().subtract( moment().date() -1, 'day' ).format('w');
-    var weekPointer = weekFirstDayCurrentMonth;
+    var weekPointer = moment().subtract(moment().date() - 1, 'day').format('w');
 
     var table = $('<table />', {
     	class: 'table-calandar'
 	});
 
     var tr = $('<tr />');
-    for (var i = 1; i <= 7; i++) {
-        var td = $('<td />', {
+    var td, dayMoment, i; // Declared here because is multiple used
+
+    for (i = 1; i <= 7; i++) {
+        td = $('<td />', {
             class: 'bold blue-grey-text center-align'
         });
 
-        var dayMoment = moment(weekPointer, 'w').day(i);
+        dayMoment = moment(weekPointer, 'w').day(i);
 
         $(td).append( dayMoment.format('dd') );
         $(tr).append(td);
@@ -503,9 +505,9 @@ function makeCalendar()  {
     var exit = false;
 
     while (!exit) {
-        var tr = $('<tr />');
-        for (var i = 1; i <= 7; i++) {
-            var dayMoment = moment(weekPointer, 'w').day(i);
+        tr = $('<tr />');
+        for (i = 1; i <= 7; i++) {
+            dayMoment = moment(weekPointer, 'w').day(i);
 
             var day = dayMoment.format('D');
             var month = dayMoment.format('M');
@@ -514,7 +516,7 @@ function makeCalendar()  {
             	class: 'dayCalandar'
 			});
 
-            var td = $('<td />', {
+            td = $('<td />', {
             	class: 'blue-grey-text center-align' +
 				((month === currentMonth) ? ((day === moment().format('D')) ? ' text-lighten-5 radius-full' : ' ' ) : ' text-lighten-4') +
 				((day === moment().format('D')) ? ' teal' : '')
@@ -529,5 +531,4 @@ function makeCalendar()  {
         weekPointer++;
     }
     $('.calandar').html(table);
-
 }
