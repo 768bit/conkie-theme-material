@@ -1,77 +1,174 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Material Design Conkie Theme</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Material Design Conkie Theme</title>
 
-        <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/materialize.min.css" media="screen,projection">
-        <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/style.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/materialize.min.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/grid.css" media="screen,projection">
+    <link type="text/css" rel="stylesheet" href="<%=paths.theme%>/css/style.css" media="screen,projection">
 
-        <script href="<%=paths.modules%>/jquery/dist/jquery.min.js"></script>
-        <script href="<%=paths.theme%>/js/materialize.min.js"></script>
-        <script src="<%=paths.theme%>/app.js"></script>
-        <script src="<%=paths.modules%>/highcharts-ng/dist/highcharts-ng.min.js"></script>
+    <script href="<%=paths.modules%>/jquery/dist/jquery.min.js"></script>
+    <script href="<%=paths.theme%>/js/materialize.min.js"></script>
+    <script src="<%=paths.theme%>/app.js"></script>
 
-        <!-- Meta options passed to Conkie -->
-        <meta name="conkie-window-type" content="desktop"/>
-        <meta name="conkie-transparent" content="true"/>
-        <meta name="conkie-width" content="1920"/>
-        <meta name="conkie-height" content="1080"/>
-    </head>
-    <body ng-app="app" ng-controller="conkieController">
-    <script src="<%=paths.modules%>/angular/angular.min.js"></script>
-    <script src="<%=paths.modules%>/angularjs-gauge/dist/angularjs-gauge.min.js"></script>
+    <!-- Meta options passed to Conkie -->
+    <meta name="conkie-window-type" content="desktop"/>
+    <meta name="conkie-transparent" content="true"/>
+    <meta name="conkie-width" content="1920"/>
+    <meta name="conkie-height" content="1080"/>
+</head>
+<body ng-app="app" ng-controller="conkieController">
+<script src="<%=paths.modules%>/angular/angular.min.js"></script>
+<script src="<%=paths.modules%>/angularjs-gauge/dist/angularjs-gauge.min.js"></script>
 
-        <main class="container blue-grey-text text-darken-3">
-            <div class="row col s12"></div>
+<main class="container blue-grey-text text-darken-3">
+    <!-- Main column Left -->
+    <div class="row col-8">
 
-            <!-- General info -->
-            <div class="row">
-                <div class="col s2 col s3 pull-s2">
-                    <article class="row col s12 pull-s1 z-depth-4 no-pad">
-                        <header class="blue lighten-1 white-text col s12 brad-top">
-                            <h5 class="center-align">System Info</h5>
+        <!-- Separator -->
+        <div class="row col-24 separator"></div>
+
+        <!-- General info -->
+        <div class="row separator">
+            <div class="col-12 col-push-1">
+                <article class="row z-depth-4 no-pad">
+                    <header class="col-24 blue lighten-1 white-text brad-top">
+                        <h5 class="center-align">System Info</h5>
+                    </header>
+                    <section class="col-24 white brad-bottom">
+                        <header>
+                            <h4 ng-show="stats.system.hostname" class="center-align">{{stats.system.hostname}}</h4>
                         </header>
-                        <section class="white col s12 brad-bottom">
-                            <header>
-                                <h4 ng-show="stats.system.hostname" class="center-align">{{stats.system.hostname}}</h4>
-                            </header>
 
-                            <p><b>CPU : </b><span ng-show="stats.cpu.usage" class="picture-slot3">{{stats.cpu.usage}}%</span></p>
-                            <p><b>Temp : </b><span ng-show="stats.temperature.main" class="picture-slot3">{{stats.temperature.main}}°C</span></p>
-                            <p><b>IOread : </b><span ng-show="stats.io">{{stats.io.totalRead}} Kb</span></p>
-                            <p><b>Mem : </b><span ng-show="stats.memory" class="picture-slot5">{{stats.memory.used | byteSize:true}}</span></p>
-                            <p><b>Down : </b><span ng-show="stats.netTotal" class="picture-slot6">{{stats.netTotal.downSpeed | byteSize:true}}</span></p>
-                        </section>
-                    </article>
-                </div>
+                        <p><b>CPU : </b><span ng-show="stats.cpu.usage"
+                                              class="picture-slot3">{{stats.cpu.usage}}%</span></p>
+                        <p><b>Temp : </b><span ng-show="stats.temperature.main" class="picture-slot3">{{stats.temperature.main}}°C</span>
+                        </p>
+                        <p><b>IOread : </b><span ng-show="stats.io">{{stats.io.totalRead}} Kb</span></p>
+                        <p><b>Mem : </b><span ng-show="stats.memory" class="picture-slot5">{{stats.memory.used | byteSize:true}}</span>
+                        </p>
+                        <p><b>Down : </b><span ng-show="stats.netTotal" class="picture-slot6">{{stats.netTotal.downSpeed | byteSize:true}}</span>
+                        </p>
+                    </section>
+                </article>
             </div>
+        </div>
 
-            <div class="row col s12"></div>
+        <!-- Separator -->
+        <div class="row col-24 separator"></div>
 
-            <!-- Date & time -->
-            <div class="row">
-                <div class="col s2 col s3 pull-s2">
-                    <article class="row col s12 pull-s1 z-depth-4 no-pad">
-                        <header class="teal darken-2 white-text col s12 brad-top">
-                            <h5 class="center-align capitalize" ng-show="weekday">{{weekday}}</h5>
+        <!-- Date & time -->
+        <div class="row">
+            <div class="col-12 col-push-1">
+                <article class="row z-depth-4 no-pad">
+                    <header class="col-24 teal darken-2 white-text brad-top">
+                        <h5 class="center-align capitalize" ng-show="weekday">{{weekday}}</h5>
+                    </header>
+                    <section class="col-24 white brad-bottom no-pad">
+                        <header class="teal white-text pad-tb-5">
+                            <h4 ng-show="month" class="center-align no-mar uppercase">{{month.substr(0,3)}}</h4>
+                            <h3 ng-show="day" class="center-align no-mar">{{day}}</h3>
+                            <h4 ng-show="year" class="center-align no-mar blue-grey-text text-lighten-5">{{year}}</h4>
                         </header>
-                        <section class="white col s12 brad-bottom no-pad">
-                            <header class="teal white-text pad-tb-5">
-                                <h4 ng-show="month" class="center-align no-mar uppercase">{{month.substr(0,3)}}</h4>
-                                <h3 ng-show="day" class="center-align no-mar">{{day}}</h3>
-                                <h4 ng-show="year" class="center-align no-mar blue-grey-text text-lighten-5">{{year}}</h4>
-                            </header>
 
-                            <div class="pad-lr-5 center-align">
-                                <p><span ng-show="time" class="time">{{time}}</span></p>
-                                <div class="calandar"></div>
+                        <div class="pad-lr-5 center-align">
+                            <p><span ng-show="time" class="time">{{time}}</span></p>
+                            <div class="calandar"></div>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main column Center -->
+    <div class="row col-8"></div>
+
+    <!-- Main column Right -->
+    <div class="row col-8">
+
+        <!-- Separator -->
+        <div class="row col-24 separator"></div>
+
+        <!-- Disks -->
+        <div ng-if="stats.disks">
+
+            <div class="col-12 col-pull-1">
+                <article class="row z-depth-4 no-pad">
+                    <header class="col-24 indigo lighten-1 white-text brad-top">
+                        <h5 class="center-align">Disks</h5>
+                    </header>
+                    <section class="col-24 white brad-bottom">
+                        <div class="center-align mar-t-20 mar-b-20" ng-repeat="part in stats.disks">
+                            <table class="table-gauge">
+                                <tr class="tr-gauge">
+                                    <th class="cell-gauge">{{part.mount}}</th>
+                                </tr>
+                                <tr class="tr-gauge">
+                                    <td class="cell-gauge">
+                                        <ng-gauge size="100" type="arch" thick="15" value="part.percentUsed" cap="round"
+                                                  append="%" background-color="#ecf0f1" duration="100"></ng-gauge>
+                                    </td>
+                                </tr>
+                                <tr class="tr-gauge">
+                                    <td class="cell-gauge">{{part.used | byteSize:true}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-pull-2">
+            <!-- CPU -->
+            <div ng-if="stats.cpu" class="row separator">
+                <div class="col-24">
+                    <article class="row z-depth-4 no-pad">
+                        <header class="col-24 red lighten-1 white-text brad-top">
+                            <h5 class="center-align">CPU</h5>
+                        </header>
+                        <section class="col-24 white brad-bottom">
+                            <div class="center-align mar-t-20">
+                                <ng-gauge size="180" type="arch" thick="15" value="stats.cpu.usage" cap="round"
+                                          label="Usage" append="%" background-color="#ecf0f1"></ng-gauge>
+                            </div>
+
+                            <div class="row">
+                                <div>{{stats.topCPU[0].cpuPercent}}</div>
                             </div>
                         </section>
                     </article>
                 </div>
             </div>
 
-        </main>
-    </body>
+            <!-- Separator -->
+            <div class="row col-24 separator"></div>
+
+            <!-- Memory -->
+            <div ng-if="stats.memory" class="row separator">
+
+                <div class="col-24">
+                    <article class="row z-depth-4 no-pad">
+                        <header class="col-24 orange lighten-1 white-text brad-top">
+                            <h5 class="center-align">Memory</h5>
+                        </header>
+                        <section class="col-24 white brad-bottom">
+                            <div class="center-align mar-t-20">
+                                <ng-gauge size="180" type="arch" thick="15" value="stats.memory.percentUsed" cap="round"
+                                          label="{{stats.memory.used | byteSize:true}}" append="%"
+                                          background-color="#ecf0f1"></ng-gauge>
+                            </div>
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+</body>
 </html>
