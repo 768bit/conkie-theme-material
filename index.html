@@ -112,7 +112,7 @@
                                     </td>
                                 </tr>
                                 <tr class="tr-gauge">
-                                    <td class="cell-gauge">{{part.used | byteSize:true}}</td>
+                                    <td class="cell-gauge">{{part.used * 1024 | byteSize:true}}</td>
                                 </tr>
                             </table>
                         </div>

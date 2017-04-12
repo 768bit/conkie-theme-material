@@ -117,6 +117,7 @@ app.filter('duration', function() {
 */
 app.filter('byteSize', function() {
 	return function(value, forceZero) {
+		value = parseInt(value);
 		if (!value || !isFinite(value)) return (forceZero ? '0 B' : null);
 
 		var exponent;
